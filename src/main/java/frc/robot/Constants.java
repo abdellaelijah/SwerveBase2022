@@ -46,7 +46,7 @@ public final class Constants {
     public static final double SWERVE_DRIVE_FF_VALUE = 1023 / (MOTOR_MAXIMUM_VELOCITY / DRIVE_ENC_TO_METERS_FACTOR);
 
     /* Swerve Module Rotation constants */
-    public static final double RAD_TO_ENC_CONV_FACTOR = 10.1859; //the radian to enc factor
+    public static final double RAD_TO_ENC_CONV_FACTOR = 14.13675; // 10.1859; // the radian to enc factor
     public static final double SWERVE_ROT_P_VALUE = 0.1;
     public static final double SWERVE_ROT_I_VALUE = 0.0;
     public static final double SWERVE_ROT_D_VALUE = 0.05; 

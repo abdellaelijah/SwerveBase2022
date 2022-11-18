@@ -60,7 +60,7 @@ public class SwerveModule {
      *                        rotation motor(expecting NEO 550)
      * @param canCoderID      The CAN ID of the rotation sensor
      */
-    public SwerveModule(int driveMotorID, int rotationMotorID, int canCoderID, boolean isInverted) {
+    public SwerveModule(int driveMotorID, int rotationMotorID, int canCoderID) {
         
         //contruct and setup drive falcon
         driveMotor = new CANSparkMax(driveMotorID, MotorType.kBrushless);
@@ -69,7 +69,7 @@ public class SwerveModule {
         // above uses configSelectedFeedbackCoefficient(), to scale the
         // driveMotor to real distance, DRIVE_ENC_TO_METERS_FACTOR
         driveMotor.setIdleMode(IdleMode.kBrake);
-        driveMotor.setInverted(isInverted);// Set motor inverted(set to false)
+        driveMotor.setInverted(false);// Set motor inverted(set to false)
         driveMotor.enableVoltageCompensation(Constants.MAXIMUM_VOLTAGE);
         setDriveMotorPIDF(Constants.SWERVE_DRIVE_P_VALUE, Constants.SWERVE_DRIVE_I_VALUE,
                           Constants.SWERVE_DRIVE_D_VALUE, Constants.SWERVE_DRIVE_FF_VALUE);
