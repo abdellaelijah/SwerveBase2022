@@ -5,13 +5,14 @@
 package frc.robot.subsystems.swervelib;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 
+import frc.robot.Constants;
+
 /** Add your docs here. */
-public class SwerveRotateNEO extends SwerveRotateBase {
+public class SwerveRotateNEO extends SwerveRotateMotorBase {
     private CANSparkMax rotationMotor;
 
     public SwerveRotateNEO(int rotationMotorID){
@@ -47,7 +48,7 @@ public class SwerveRotateNEO extends SwerveRotateBase {
     }
 
     public void setRotationMotorPosition(double output){
-        rotationMotor.getPIDController().setReference(output, ControlType.kPosition);
+        rotationMotor.getPIDController().setReference(output, CANSparkMax.ControlType.kPosition);
     }
 
 }

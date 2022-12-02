@@ -5,7 +5,7 @@
 package frc.robot.subsystems.swervelib;
 
 /** Add your docs here. */
-public abstract class SwerveRotateBase {
+public abstract class SwerveRotateMotorBase {
 
     /**
      * sets the rotation motor's PIDF for the PIDF controller on the TalonFX
