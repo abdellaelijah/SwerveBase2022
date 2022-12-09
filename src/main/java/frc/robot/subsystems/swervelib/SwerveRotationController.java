@@ -5,4 +5,18 @@
 package frc.robot.subsystems.swervelib;
 
 /** Add your docs here. */
-public class SwerveRotationController {}
+public class SwerveRotationController {
+    SwerveRotateMotorBase rotatorMotor;
+    SwerveAbsoluteSensor absSensor;
+    public boolean useNeoABS;
+    public SwerveRotationController(SwerveRotateMotorBase rotatorMotor, SwerveAbsoluteSensor absSensor){
+        this.rotatorMotor = rotatorMotor;
+        this.absSensor = absSensor;
+        useNeoABS = false;
+    }
+
+    public SwerveRotationController(SwerveRotateNEO rotatorMotor){
+        this.rotatorMotor = rotatorMotor;
+        useNeoABS = true;
+    }
+}
