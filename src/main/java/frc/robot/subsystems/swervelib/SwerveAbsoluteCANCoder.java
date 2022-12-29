@@ -8,32 +8,61 @@ import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 
-/** Add your docs here. */
+/** 
+ * This class is the way to create a CANCoder object for use in the 
+ */
 public class SwerveAbsoluteCANCoder extends SwerveAbsoluteSensor{
     CANCoder rotateAbsSensor;
 
     public SwerveAbsoluteCANCoder(int canCoderID){
         //the following sensor is angle of the module, as an absolute value
         rotateAbsSensor = new CANCoder(canCoderID);
+
+        //configure the cancoder to read values between -180 to 180
         rotateAbsSensor.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
-        rotateAbsSensor.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);//The default on this is 10, but 20 might be better given our code loop rate
+
+        //The following reduces the CAN packets to a reasonable rate:
+        //The following data packet has the default of 10, but 20 makes sense since the robot code loops at 20
+        rotateAbsSensor.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
+        //the following data packet is not needed in swerve
         rotateAbsSensor.setStatusFramePeriod(CANCoderStatusFrame.VbatAndFaults, 255);
-        // System.out.println( "VbatFaults" + rotateAbsSensor.getStatusFramePeriod(CANCoderStatusFrame.VbatAndFaults));
     }
 
+    /**
+     * The CANCoder has a mechanical zero point, this is hard 
+     * to move, so this method is used to set the offset of the 
+     * CANCoder so we can dictate the zero position. 
+     * INPUTS MUST BE IN DEGREES. 
+     * 
+     * @param value a number between -180 and 180, where 0 is straight ahead
+     */
     @Override
     protected void setRotateAbsSensor(double value) {
         rotateAbsSensor.configMagnetOffset(value, 0);
     }
 
+    /**
+     * The CANCoder has a mechanical zero point, this is hard 
+     * to move, so this method is used to change the offset of 
+     * the CANCoder so we dictate the zero position as the 
+     * current position of the module.
+     */
     @Override
     public void zeroAbsPositionSensor() {
         setRotateAbsSensor(this.rotateAbsSensor.configGetMagnetOffset()-getAbsPosInDeg());
     }
 
+    /**
+     * The CANCoder reads the absolute rotational position
+     * of the module. This method returns that positon in 
+     * degrees.
+     * note: NOT Inverted module safe (use getPosInRad())
+     * 
+     * @return the position of the module in degrees, should limit from -180 to 180
+     */
     @Override
     public double getAbsPosInDeg() {
+        //The CANCOder reads values in degrees
         return rotateAbsSensor.getAbsolutePosition();
-    
     }
 }

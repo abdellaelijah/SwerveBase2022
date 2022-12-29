@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.subsystems.ADIS.CalibrationTime;
 import frc.robot.subsystems.ADIS.IMUAxis;
-import frc.robot.subsystems.swervelib.SwerveModule;
 
 /**
  * This subsystem contains all SwerveModule objects, and runs all drive functions.

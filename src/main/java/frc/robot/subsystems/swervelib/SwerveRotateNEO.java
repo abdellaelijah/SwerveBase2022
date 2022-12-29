@@ -43,8 +43,8 @@ public class SwerveRotateNEO extends SwerveRotateMotorBase {
         return rotationMotor.getEncoder().getPosition();
     }
 
-    public void driveRotateMotor(double speed){
-        this.rotationMotor.set(speed);
+    public void driveRotateMotor(double dutyCycle){
+        this.rotationMotor.set(dutyCycle);
     }
 
     public void setRotationMotorPosition(double output){

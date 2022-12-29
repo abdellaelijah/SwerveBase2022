@@ -8,7 +8,7 @@ package frc.robot.subsystems.swervelib;
 public abstract class SwerveRotateMotorBase {
 
     /**
-     * sets the rotation motor's PIDF for the PIDF controller on the TalonFX
+     * sets the rotation motor's PIDF for the PIDF controller
      * 
      * @param P value of the P constant
      * @param I value of the I constant
@@ -30,17 +30,28 @@ public abstract class SwerveRotateMotorBase {
     /**
      * This is a testing method, used to drive the module's rotation.
      * It takes pure motor duty cycle(percent output). Positive input 
-     * should result in counter-clockwise rotation. If not, the motor
-     * output must be inverted.
+     * should result in counter-clockwise rotation as viewed from the 
+     * top. If not, the motor output must be inverted.
      * 
-     * @param speed a percent output from -1.0 to 1.0, where 0.0 is stopped
+     * This method is also called by the stopRotation method.
+     * 
+     * @param dutyCycle a percent output from -1.0 to 1.0, where 0.0 is stopped
      */
-    public abstract void driveRotateMotor(double speed);
+    public abstract void driveRotateMotor(double dutyCycle);
 
     /**
      * set the rotation motor to a position based on the motors internal units.
      * @param output
      */
     public abstract void setRotationMotorPosition(double output);
+
+    /**
+     * This method is used to stop the module rotation completely. 
+     * The rotation motor's PIDController is set to DutyCyclevoltage 
+     * control mode, and output of 0.0% output.
+     */
+    public void stopRotation() {
+        driveRotateMotor(0.0);
+    }
 
 }
