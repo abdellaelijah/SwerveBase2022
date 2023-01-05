@@ -398,23 +398,23 @@ public class SwerveModule {
     }
 
     /**
-   * Minimize the change in heading the desired swerve module state would require by potentially
-   * reversing the direction the wheel spins. If this is used with the PIDController class's
-   * continuous input functionality, the furthest a wheel will ever rotate is 90 degrees.
-   *
-   * @param desiredState The desired state.
-   * @param currentAngle The current module angle.
-   * @return Optimized swerve module state.
-   */
+     * Minimize the change in heading the desired swerve module state would require by potentially
+     * reversing the direction the wheel spins. If this is used with the PIDController class's
+     * continuous input functionality, the furthest a wheel will ever rotate is 90 degrees.
+     *
+     * @param desiredState The desired state.
+     * @param currentAngle The current module angle.
+     * @return Optimized swerve module state.
+     */
     public static SwerveModuleState optimize(SwerveModuleState desiredState, Rotation2d currentAngle) {
-    var delta = desiredState.angle.minus(currentAngle);
-    if (Math.abs(delta.getRadians()) > Constants.PI_OVER_TWO) {
-        return new SwerveModuleState(
-            -desiredState.speedMetersPerSecond,
-            desiredState.angle.rotateBy(Constants.ROTATE_BY_PI));
-    } else {
-        return new SwerveModuleState(desiredState.speedMetersPerSecond, desiredState.angle);
+        var delta = desiredState.angle.minus(currentAngle);
+        if (Math.abs(delta.getRadians()) > Constants.PI_OVER_TWO) {
+            return new SwerveModuleState(
+                -desiredState.speedMetersPerSecond,
+                desiredState.angle.rotateBy(Constants.ROTATE_BY_PI));
+        } else {
+            return new SwerveModuleState(desiredState.speedMetersPerSecond, desiredState.angle);
+        }
     }
-}
     
 }

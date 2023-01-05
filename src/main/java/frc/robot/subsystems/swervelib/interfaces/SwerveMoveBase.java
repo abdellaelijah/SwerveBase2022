@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.swervelib;
+package frc.robot.subsystems.swervelib.interfaces;
 
 /** 
  * This is an abstract class for the Drive motor controller for a 
@@ -17,7 +17,7 @@ public abstract class SwerveMoveBase {
      * @param dutyCycle a number between -1.0 and 1.0, where 0.0 is not moving, as
      *                  percent duty cycle
      */
-    public abstract void setDriveMotor(double dutyCycle);
+    public abstract void setDriveDutyCycle(double dutyCycle);
 
     /**
      * Set the speed of the drive motor in meter per second.
@@ -69,5 +69,29 @@ public abstract class SwerveMoveBase {
      * @param maximumVoltage
      */
     public abstract void enableVoltageCompensation(double maximumVoltage);
+    
+    /**
+     * Method that stops the drive motor
+     */
+    public abstract void stopMotor();
+
+    /**
+     * A method to recall the minimum speed the motor 
+     * controller can output. This should be in meters 
+     * per second.
+     * 
+     * @return a positive double in meters per second
+     */
+    public abstract double getMinimumDriveSpeed();
+
+    /**
+     * A method to recall the minimum duty cycle the 
+     * motor controller can output. duty cycle is 
+     * from -1.0 to 1.0, but this value should be 
+     * below .1.
+     * 
+     * @return a positive double between 0 and 1
+     */
+    public abstract double getMinimumDutyCycle();
 
 }

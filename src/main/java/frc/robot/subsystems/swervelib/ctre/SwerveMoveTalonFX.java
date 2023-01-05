@@ -2,18 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.swervelib;
+package frc.robot.subsystems.swervelib.ctre;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+
+import frc.robot.subsystems.swervelib.interfaces.SwerveMoveBase;
 
 /** Add your docs here. */
-public class SwerveDriveTalonFX extends SwerveMoveBase {
-    
+public class SwerveMoveTalonFX extends SwerveMoveBase {
+    //TODO:finish writing this class
     private TalonFX driveMotor;
 
-    public void setDriveMotor(double dutyCycle){
+    public void setDriveDutyCycle(double dutyCycle){
         driveMotor.set(ControlMode.PercentOutput, dutyCycle);
     }
 
@@ -64,6 +68,22 @@ public class SwerveDriveTalonFX extends SwerveMoveBase {
 
     public void enableVoltageCompensation(double maximumVoltage){
         driveMotor.configVoltageCompSaturation(maximumVoltage);
+    }
+
+    public void stopMotor(){
+        driveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
+    }
+
+    @Override
+    public double getMinimumDriveSpeed() {
+        //TODO: Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getMinimumDutyCycle() {
+        //TODO: Auto-generated method stub
+        return 0;
     }
 
 }
