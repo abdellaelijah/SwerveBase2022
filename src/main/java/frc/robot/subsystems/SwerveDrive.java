@@ -81,8 +81,8 @@ public class SwerveDrive extends SubsystemBase {
       Constants.FRONT_LEFT_POSITION, Constants.REAR_LEFT_POSITION, 
       Constants.REAR_RIGHT_POSITION, Constants.FRONT_RIGHT_POSITION);
 
-    // Constructs IMU object
-    imu = new ADIS(IMUAxis.kY, SPI.Port.kOnboardCS0, CalibrationTime._4s);//Must use params, won't work without
+    // Constructs IMU object (gyro)
+    imu = new ADIS(IMUAxis.kZ, SPI.Port.kOnboardCS0, CalibrationTime._4s);//Must use params, won't work without
     
     //construct the odometry class.
     driveOdometry = new SwerveDriveOdometry(driveKinematics, getGyroRotation2d());
@@ -292,16 +292,16 @@ public class SwerveDrive extends SubsystemBase {
    */
   public void resetGyro(){
     //Resets the gyro(zero it)
-    if(!imu.getYawAxis().equals(IMUAxis.kY)){
-      return;
-    }
+    // if(!imu.getYawAxis().equals(IMUAxis.kY)){
+    //   return;
+    // }
     imu.reset();
   }
 
   public void resetGyroZ(){
-    if(!imu.getYawAxis().equals(IMUAxis.kY)){
-      return;
-    }
+    // if(!imu.getYawAxis().equals(IMUAxis.kY)){
+    //   return;
+    // }
     imu.reset();
   }
 
@@ -313,9 +313,9 @@ public class SwerveDrive extends SubsystemBase {
    * @param newCurrentAngle value the gyro should now read in degrees.
    */
   public void setGyro(double newCurrentAngle){
-    if(!imu.getYawAxis().equals(IMUAxis.kY)){
-      return;
-    }
+    // if(!imu.getYawAxis().equals(IMUAxis.kY)){
+    //   return;
+    // }
     imu.setGyroAngle(newCurrentAngle);
   }
 
@@ -340,7 +340,7 @@ public class SwerveDrive extends SubsystemBase {
    * @return the angle of the robot in radians
    */
   public double getGyroInRad(){
-    return imu.getYawAxis().equals(ADIS.IMUAxis.kY)? Math.toRadians(getGyroInDeg()) : 0.0;// Pull the gyro in degrees, convert and return in radians
+    return Math.toRadians(getGyroInDeg()); // Pull the gyro in degrees, convert and return in radians
     //note that counterclockwise rotation is positive
   }
 
@@ -350,10 +350,10 @@ public class SwerveDrive extends SubsystemBase {
   }
 
   public void setGyroAxis(ADIS.IMUAxis axis){
-    if(imu.getYawAxis().equals(axis)){
-      return;
-    }
-    imu.setYawAxis(axis);
+    // if(imu.getYawAxis().equals(axis)){
+    //   return;
+    // }
+    // imu.setYawAxis(axis);
   }
 
   public IMUAxis getGyroAxis(){
@@ -367,7 +367,7 @@ public class SwerveDrive extends SubsystemBase {
    * @return the angle of the robot in degrees
    */
   public double getGyroInDeg(){
-    return imu.getYawAxis().equals(ADIS.IMUAxis.kY)? imu.getAngle() : 0.0;//getYawAxis();//*-1;//Pull gyro in degrees
+    return imu.getAngle(); //getYawAxis();//*-1;//Pull gyro in degrees
     //note counterclockwise rotation is positive
   }
 
